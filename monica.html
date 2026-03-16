@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Portfolio | 2026 Edition</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --accent: #a855f7;
+            --bg: #030712;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+            --text-dim: #94a3b8;
+        }
+
+        /* Smooth Scrolling */
+        html { scroll-behavior: smooth; }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- Custom Cursor --- */
+        #cursor {
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.15s ease-out;
+            display: none; /* Hidden on mobile */
+        }
+
+        @media (min-width: 1024px) {
+            body { cursor: none; }
+            #cursor { display: block; }
+            a, button, .card, .badge { cursor: none; }
+        }
+
+        .cursor-hover { transform: scale(4); }
+
+        /* --- Background Animation --- */
+        .blob {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.3;
+            animation: move 25s infinite alternate ease-in-out;
+        }
+
+        @keyframes move {
+            0% { transform: translate(-10%, -10%); }
+            100% { transform: translate(80vw, 50vh); }
+        }
+
+        /* --- Layout & Navigation --- */
+        nav {
+            padding: 1.5rem 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: 2px; }
+
+        section { padding: 100px 8%; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+
+        /* --- Hero Section --- */
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .typing-text {
+            color: var(--primary);
+            border-right: 3px solid var(--primary);
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink { 50% { border-color: transparent; } }
+
+        .tagline {
+            font-size: 1.25rem;
+            color: var(--text-dim);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+        }
+
+        /* --- Components --- */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: white;
+            color: black;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .btn:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4); }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            border-radius: 30px;
+            backdrop-filter: blur(15px);
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.07);
+            transform: translateY(-10px);
+        }
+
+        .badge {
+            padding: 0.6rem 1.2rem;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .badge:hover { background: var(--primary); border-color: var(--primary); }
+
+        /* --- Reveal Animation --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="cursor"></div>
+    <div class="blob"></div>
+
+    <nav>
+        <div class="logo">PORTFOLIO.OS</div>
+        <a href="#contact" class="btn" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">Contact</a>
+    </nav>
+
+    <section class="hero">
+        <h1 class="reveal">I design <span class="typing-text" id="typewriter"></span></h1>
+        <p class="tagline reveal">Full-stack engineer specializing in high-fidelity digital interfaces and scalable cloud architecture.</p>
+        <div class="reveal">
+            <a href="#work" class="btn">View Projects</a>
+        </div>
+    </section>
+
+    <section id="work">
+        <h2 class="reveal" style="font-size: 2.5rem; margin-bottom: 2rem;">Featured Works</h2>
+        <div class="grid">
+            <div class="card reveal">
+                <h4 style="color: var(--primary); margin-bottom: 0.5rem;">01. APPLICATION</h4>
+                <h3>Quantum Dashboard</h3>
+                <p style="color: var(--text-dim); margin-top: 1rem;">A real-time analytics engine built for decentralized finance protocols.</p>
+            </div>
+            <div class="card reveal">
+                <h4 style="color: var(--accent); margin-bottom: 0.5rem;">02. INTERFACE</h4>
+                <h3>Nebula OS</h3>
+                <p style="color: var(--text-dim); margin-top: 1rem;">Conceptual operating system focused on spatial computing and UX.</p>
+            </div>
+        </div>
+    </section>
+
+    <section style="text-align: center; min-height: 50vh;">
+        <h2 class="reveal" style="margin-bottom: 2rem;">Technology Stack</h2>
+        <div class="reveal" style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+            <span class="badge">TypeScript</span>
+            <span class="badge">React / Next.js</span>
+            <span class="badge">Three.js</span>
+            <span class="badge">AWS Architecture</span>
+            <span class="badge">Python ML</span>
+        </div>
+    </section>
+
+    <script>
+        // 1. Custom Cursor Logic
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        document.querySelectorAll('a, .card, .badge').forEach(item => {
+            item.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'));
+            item.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
+        });
+
+        // 2. Typewriter Effect
+        const words = ["Experiences.", "Interfaces.", "Solutions.", "the Future."];
+        let i = 0, j = 0, currentWord = "", isDeleting = false;
+        const typeTarget = document.getElementById('typewriter');
+
+        function type() {
+            currentWord = words[i];
+            if (isDeleting) {
+                typeTarget.textContent = currentWord.substring(0, j - 1);
+                j--;
+            } else {
+                typeTarget.textContent = currentWord.substring(0, j + 1);
+                j++;
+            }
+
+            if (!isDeleting && j === currentWord.length) {
+                isDeleting = true;
+                setTimeout(type, 2000);
+            } else if (isDeleting && j === 0) {
+                isDeleting = false;
+                i = (i + 1) % words.length;
+                setTimeout(type, 500);
+            } else {
+                setTimeout(type, isDeleting ? 50 : 150);
+            }
+        }
+        type();
+
+        // 3. Scroll Reveal Logic
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            reveals.forEach(el => {
+                var windowHeight = window.innerHeight;
+                var elementTop = el.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) {
+                    el.classList.add("active");
+                }
+            });
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Initial check
+    </script>
+</body>
+</html>
